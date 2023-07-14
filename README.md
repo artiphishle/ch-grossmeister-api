@@ -1,34 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ch-grossmeister-api
 
-## Getting Started
+Chess API built for grossmeister.ch
 
-First, run the development server:
+- Mongodb Atlas
+- Mongoose
+- Next.js
+
+## Quickstart
+
+**1. Environment variables\***
+
+First: provide a `.env` file in the root directory, and add the environment:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+MONGODB_URI={secret}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**2. Run the API**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# DEV: localhost:3001
+npm run dev
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# PROD: build
+npm run build
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## API Endpoints
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### ♟️ /api/game
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+| Method | Endpoint           | Description                     |
+| ------ | ------------------ | ------------------------------- |
+| POST   | /api/game          | Create a new game               |
+| GET    | /api/game/[gameId] | Find game by \_id               |
+| PATCH  | /api/game/[gameId] | Payload: `data: Partial<IGame>` |
+| DELETE | /api/game/[gameId] | Delete game by \_id             |
 
-## Deploy on Vercel
+### ♟️ /api/opening
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+As the opening book is added by administrators, users get only 'read' permissions to examine the immutable openings.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+| Method | Endpoint           | Description                |
+| ------ | ------------------ | -------------------------- |
+| GET    | /api/opening/[fen] | Find opening by FEN string |
+
+### ♟️ /api/user
+
+As user authentication is handled using Clerk there is only a `GET` endpoint to retreive the logged user data.
+
+| Method | Endpoint  | Description            |
+| ------ | --------- | ---------------------- |
+| GET    | /api/user | Returns logged in user |
+
+## API Authentication
+
+⚠️ Authentication is **bypassed**, everyone is the same mock user now.
