@@ -19,11 +19,12 @@ MONGODB_URI={secret}
 **2. Run the API**
 
 ```bash
-# DEV: localhost:3001
-npm run dev
+# clean, build & run docker image
+npm run do:clean
+npm run do:build
+npm run do:run
 
-# PROD: build
-npm run build
+# visit: localhost:3001/api/opening
 ```
 
 ---
